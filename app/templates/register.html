@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h1>Registrati alla nostra mega app</h1>
+    <form action="" method="POST">
+        {{ form.hidden_tag()}}
+        {% for field in "username,password,repeat_password,number".split(",") %}
+        <p>
+            {% if form[field].errors %}
+            <div>{{ form[field].errors}}</div>
+            {% endif %}
+            <label for="">{{ field }}</label>
+            {{ form[field] }}
+        </p>
+        {% endfor %}
+        <input type="submit" value="Registrati">
+    </form>
+</body>
+</html>
