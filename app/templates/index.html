@@ -6,7 +6,12 @@
 </head>
 <body>
     <h1>Benvenuto su questa app mega meravigliosa</h1>
+    {% if session['user'] %}
+    <h2>Ehi sembra che tu sei un utente loggato caro {{ session['user'].username }}</h2>
+    <a href="/logout">Logout</a>
+    {% else %}
     <a href="/login">Login</a>
     <a href="/register">Registrati</a>
+    {% endif %}
 </body>
 </html>

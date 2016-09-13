@@ -10,6 +10,12 @@ class User(db.Model):
     def __repr__(self):
         return "<User: %r>" % self.username
 
+    def to_json(self):
+        return {
+            "username": self.username,
+            "phone_number": self.phone_number
+        }
+
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
