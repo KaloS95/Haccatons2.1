@@ -58,5 +58,6 @@ class Offer(db.Model):
     price=db.Column(db.Integer)
 
     db.relationship('Transition', backref="order")
+    user = db.relationship('User', backref="user", foreign_keys=[user_id])
     
   

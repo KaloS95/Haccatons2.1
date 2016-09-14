@@ -6,3 +6,6 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
 SECRET_KEY = 'you-will-never-guess'
 
+HOST = "192.168.92.46"
+PORT = 5000
+

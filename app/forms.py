@@ -26,3 +26,8 @@ class RegisterForm(Form):
 
 class OfferForm(Form):
     quantity = IntegerField('number', validators=[DataRequired()])
+
+class NewOfferForm(Form):
+    quantity = IntegerField('quantity', validators=[DataRequired()])
+    price = IntegerField('price', validators=[DataRequired()])
+

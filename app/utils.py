@@ -76,3 +76,21 @@ def create_transition(order):
 
     db.session.add(newTrans)
     db.session.commit()
+
+def create_offer(data, item):
+    user = models.User.query.get(session.get('user', None)['id'])
+    quantity = data.quantity.data
+    price = data.price.data
+    item = item 
+
+    print item
+    print user
+
+    db.session.add(models.Offer(user=user,quantity=quantity, price=price, item=item))
+    db.session.commit()
+ 
+def getItemFromId(item_id):
+    context = {}
+    item = models.Item.query.get(item_id)
+    context['item'] = item
+    return context

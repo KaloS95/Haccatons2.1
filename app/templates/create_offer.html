@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} Crea Offerta {% endblock %}
+{% block content %}
+{{ context.item.name }}
+<form action="" method="POST" name="offer">
+    {{ context.form.hidden_tag() }}
+    <input type="hidden" name="quantity" value="0" id="quantity-input">
+    <div>
+        <label for="">Prezzo</label>
+        <input type="number" name="price">
+    </div>
+    <a href="#" id="minus">-</a>
+    <span id="quantity">Quantità Desiderata</span>
+    <a href="#" id="plus">+</a>
+    <input type="submit" value="Prosegui">
+</form>
+<script type="text/javascript">
+    var minus = document.getElementById('minus'); 
+    var plus = document.getElementById('plus');
+
+    var quantity = 0;
+    var elem = document.getElementById('quantity');
+    var elemInput = document.getElementById('quantity-input');
+    elem.innerHTML = quantity;
+
+    minus.addEventListener('click', function(e) {
+        e.preventDefault();
+        quantity > 0 ? quantity -= 1 : 0;
+        elem.innerHTML = quantity;
+        elemInput.value = quantity; 
+    });
+
+    plus.addEventListener('click', function(e) {
+        e.preventDefault();
+        quantity += 1; 
+        elem.innerHTML = quantity;
+        elemInput.value = quantity; 
+    });
+</script>
+{% endblock %}
