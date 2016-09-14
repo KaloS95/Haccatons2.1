@@ -4,10 +4,13 @@
 <ul>
     {% for transition in context.transitions %}
     <li>
-    <p>{{transition.seller}}</p>
-    <p>{{transition.buyer}}</p>
-    <p>{{transition.price}}</p>
-    <p>{{transition.quantity}}</p>
+        <p>{{transition.seller}}</p>
+        <p>{{transition.buyer}}</p>
+        <p>{{transition.price}}</p>
+        <p>{{transition.quantity}}</p>
+        {% if context.mode == 'still' %}
+        <a href="/confirm-transition/{{transition.id}}/">Concludi</a>
+        {% endif %}
     </li>
     {% endfor %}
 </ul>
