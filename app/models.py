@@ -7,7 +7,7 @@ class User(db.Model):
     phone_number = db.Column(db.Integer)
     auth_code = db.Column(db.String(5))
 
-    offers=db.relationship('Offer', backref='offerer', lazy="dynamic")
+    offers = db.relationship('Offer', backref='offerer', lazy="dynamic")
 
     db.relationship('Transition', backref="buyer", lazy="dynamic") 
     db.relationship('Transition', backref="seller", lazy="dynamic") 
@@ -21,6 +21,13 @@ class User(db.Model):
             "username": self.username,
             "phone_number": self.phone_number
         }
+    def getTransition(self, mode):
+        if mode == 'in':
+            return models.Transition.query.filter(models.Transition.buyer.id == self.id).all()
+        elif mode == 'out':
+            return models.Transition.query.filter(models.Transition.seller.id == self.id).all()
+        else:
+            pass
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)

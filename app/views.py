@@ -76,6 +76,22 @@ def request_success(mode, order_id):
     return render_template('request-success.html', context=context)
 
 """
+PROFILE
+"""
+
+@app.route('/profile/')
+@login_required
+def get_profile():
+    context = getProfileInfo()
+    return render_template('profile_info.html', context=context)
+
+@app.route('/profile/transition_in')
+@login_required
+def get_profile_transition_in():
+    context = getTransition("in")
+    return render_template('profile_transitions.html', context=context)
+
+"""
 USER LOGGING
 """
 @app.route('/register', methods=["GET", "POST"])
