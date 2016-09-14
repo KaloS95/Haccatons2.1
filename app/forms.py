@@ -23,3 +23,6 @@ class RegisterForm(Form):
             return False
 
         return True
+
+class OfferForm(Form):
+    quantity = IntegerField('number', validators=[DataRequired()])

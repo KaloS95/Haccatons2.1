@@ -3,13 +3,13 @@
 from app import app
 from flask import render_template, redirect, session
 
-from .forms import LoginForm, RegisterForm 
+from .forms import *
 
 from utils import *
 
 @app.route('/')
 def index():
-    if not session['user']:
+    if not session.get('user', None):
         return redirect('/login')
     return redirect('/category')
 
@@ -19,9 +19,9 @@ def category_list():
     return render_template('category.html',
                             context=context)
 
-@app.route('/category/<category_name>/')
-def category_detail(category_name):
-    context = getItemFromCategory(category_name)
+@app.route('/category/<category_id>/')
+def category_detail(category_id):
+    context = getItemFromCategory(category_id)
     return render_template('items_list.html',
 			    context=context)
 
@@ -31,7 +31,23 @@ def items_list_form_category(category_name, item_id):
     return render_template('offers_list.html',
 			    context=context)
 
-    
+@app.route('/category/<category_name>/<item_id>/<order_id>', methods=["GET", "POST"])
+def order_detail(category_name, item_id, order_id):
+    form = OfferForm()
+
+    if form.validate_on_submit():
+        session['quantity'] = form.quantity.data
+        return redirect('/request-success/' + order_id + "/")
+    context = getOrderDetail(order_id)
+    context['form'] = form
+    return render_template('offer_detail.html',
+                           context=context)
+
+@app.route('/request-success/<order_id>/')
+def request_success(order_id):
+    context = getOrderDetail(order_id)
+    create_transition(context['order'])
+    return render_template('request-success.html', context=context)
 
 @app.route('/register', methods=["GET", "POST"])
 def register():

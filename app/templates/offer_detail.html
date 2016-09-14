@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %} Dettaglio offerta {{ context.order.id }}{% endblock %}
+{% block content %}
+    <p>Price: {{context.order.price}}</p>
+    <p>Quantity: {{context.order.quantity}}</p>
+    <p>{{context.order.offerer.username}}</p>
+    <p>Scegli la quantità di questo prodotto</p>
+    <a href="#" id="minus">-</a>
+    <span id="quantity" max="{{context.order.quantity}}">Quantità Desiderata</span>
+    <a href="#" id="plus">+</a>
+    {{ context.form.errors }}
+    <form action="" method="POST" name="offer">
+        {{ context.form.hidden_tag() }}
+        <input type="hidden" name="quantity" value="0" id="quantity-input">
+        <input type="submit" value="Prosegui">
+    </form>
+    <script type="text/javascript">
+        var minus = document.getElementById('minus'); 
+        var plus = document.getElementById('plus');
+
+        var quantity = 0;
+        var elem = document.getElementById('quantity');
+        var elemInput = document.getElementById('quantity-input');
+        var max = parseInt(elem.getAttribute('max'));
+        elem.innerHTML = quantity;
+
+        minus.addEventListener('click', function(e) {
+                e.preventDefault();
+                quantity > 0 ? quantity -= 1 : 0;
+                elem.innerHTML = quantity;
+                elemInput.value = quantity; 
+        });
+
+        plus.addEventListener('click', function(e) {
+                e.preventDefault();
+                quantity < max ? quantity += 1 : max;
+                elem.innerHTML = quantity;
+                elemInput.value = quantity; 
+        });
+    </script>
+{% endblock %}

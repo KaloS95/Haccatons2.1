@@ -2,7 +2,7 @@
 {% block title %} Items List {% endblock %}
 {% block content %}
 <ul>
-    {% for item in context.items_list %}
+    {% for item in context.elems %}
     <li>
         <a href="./{{item.id}}">{{item.name}}</a>
     </li>

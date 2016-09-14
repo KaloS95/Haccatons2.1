@@ -46,31 +46,33 @@ def getItemList(item_id):
 
     return context
 
-
 def getItemFromCategory(cat_id):
     context = {}
-    print cat_id
-	
-    items_list = models.Category.query.filter(models.Category.id==cat_id).one().items.all()
-
-    context['elems'] = items_list
- 
+    items_list = models.Category.query.get(cat_id).items.all()
+    context['items_list'] = items_list
     return context
+
 def getItemOffers(item_id):
     context = {}
 
-    item_offers=models.Item.query.filter(models.Item.id==item_id).one().av_offers.all()
+    item_offers = models.Item.query.filter(models.Item.id==item_id).one().av_offers.all()
 
-    context['item_offers']=item_offers
+    context['item_offers'] = item_offers
 	
     return context
 
+def getOrderDetail(order_id):
+    context = {}
+    order = models.Offer.query.get(order_id) 
+    context['order'] = order
+    return context
 
+def create_transition(order):
+    buyer = models.User.query.get(session.get('user', None)['id'])
+    seller = order.offerer 
+    quantity = session.get('quantity', 0)
 
+    newTrans = models.Transition(buyer=buyer, seller=seller, order=order, quantity=quantity)
 
-
-
-
-
-
-
+    db.session.add(newTrans)
+    db.session.commit()

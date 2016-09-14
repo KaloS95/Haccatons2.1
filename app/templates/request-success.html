@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} Richiesta andata a buon fine! {% endblock %}
+{% block content %}
+<h2>Congratulazioni!</h2>
+<p>Il tuo ordine sta andando a buon fine!</p>
+<p>Contatta il venditore per recuperare i prodotti che hai scelto!</p>
+{{ context.order.offerer.phone_number}}
+<p>Non dimenticarti, quando avrai concluso l'affare di inserire il feedback nel tuo profilo!</p>
+<a href="/profile">Vai al tuo profilo</a>
+{% endblock %}
+

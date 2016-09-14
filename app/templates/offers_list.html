@@ -4,7 +4,7 @@
 <ul>
     {% for item in context.item_offers %}
     <li>
-        <a href="./{{item.id}}">{{item.name}}</a>
+    <a href="./{{item.id}}">{{item.price}} {{item.quantity}}</a>
     </li>
     {% endfor %}
 </ul>

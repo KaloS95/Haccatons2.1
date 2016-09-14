@@ -6,12 +6,18 @@ class User(db.Model):
     password = db.Column(db.String(64))
     phone_number = db.Column(db.Integer)
     auth_code = db.Column(db.String(5))
+
     offers=db.relationship('Offer', backref='offerer', lazy="dynamic")
+
+    db.relationship('Transition', backref="buyer", lazy="dynamic") 
+    db.relationship('Transition', backref="seller", lazy="dynamic") 
+
     def __repr__(self):
         return "<User: %r>" % self.username
 
     def to_json(self):
         return {
+            "id": self.id,
             "username": self.username,
             "phone_number": self.phone_number
         }
@@ -32,6 +38,17 @@ class Item(db.Model):
 
 class Transition(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    seller_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    order_id = db.Column(db.Integer, db.ForeignKey('offer.id'))
+    quantity = db.Column(db.Integer)
+
+    buyer = db.relationship('User', backref="transitions_as_buyer", foreign_keys=[buyer_id])
+    seller = db.relationship('User', backref="transitions_as_seller", foreign_keys=[seller_id])
+    order = db.relationship('Offer', backref="transitions", foreign_keys=[order_id])
+
+    def __repr__(self):
+        return "<%r -> %r = %r>" % (self.buyer.username, self.seller.username, self.quantity)
 
 class Offer(db.Model):
     id=db.Column(db.Integer, primary_key=True)
@@ -39,5 +56,7 @@ class Offer(db.Model):
     user_id=db.Column(db.Integer,db.ForeignKey('user.id'))
     quantity=db.Column(db.Integer)
     price=db.Column(db.Integer)
+
+    db.relationship('Transition', backref="order")
     
   
