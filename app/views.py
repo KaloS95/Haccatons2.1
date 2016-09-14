@@ -1,16 +1,32 @@
 # -*- coding: utf-8 -*-
 
 from app import app
-from flask import render_template, redirect
+from flask import render_template, redirect, session
 
 from .forms import LoginForm, RegisterForm 
 
-from utils import create_user, login, logout
+from utils import create_user, login, logout, getCategoryList
 
 @app.route('/')
-@app.route('/index')
 def index():
-    return render_template('index.html')
+    if not session['user']:
+        return redirect('/login')
+    return redirect('/category')
+
+@app.route('/category')
+def category_list():
+    context = getCategoryList()
+    return render_template('category.html',
+                            context=context)
+
+@app.route('/category/<category_name>/')
+def category_detail(category_name):
+    return category_name
+
+@app.route('/category/<category_name>/<item_id>/')
+def items_list_form_category(category_name, item_id):
+    return "Category: %s Id: %s" % (category_name, item_id)
+    
 
 @app.route('/register', methods=["GET", "POST"])
 def register():

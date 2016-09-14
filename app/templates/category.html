@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} Categorie {% endblock %}
+{% block content %}
+<ul>
+    {% for cat in context.category %}
+    <li>
+        <a href="category/{{cat.name.lower()}}">{{cat.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

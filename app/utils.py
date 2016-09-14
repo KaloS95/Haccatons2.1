@@ -27,3 +27,15 @@ def create_user(data):
 
 def logout():
     session['user'] = None
+
+def getCategoryList():
+    context = {}
+
+    category = models.Category.query.all()
+
+    context['category'] = category
+
+    return context
+
+
+
