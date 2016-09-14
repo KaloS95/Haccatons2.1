@@ -4,13 +4,23 @@
 <p>{{context.user.username}}</p>
 <p>{{context.user.phone_number}}</p>
 
+<div>Vendite</div>
+
 <p>
-<a href="profile/transition_in/">Transitioni in corso</a>
-{{ context.transition_in_len }}
+<a href="transition_in_progress">Transitioni in corso</a>
 </p>
 <p>
-<a href="profile/transition_out/">Transitioni concluse</a>
-{{ context.transition_out_len }}
+<a href="transition_concluded">Transitioni concluse</a>
+</p>
+
+<div>Acquisti</div>
+
+<p>
+<a href="transition_in_progress/buy">Transitioni in corso</a>
+</p>
+<p>
+<a href="transition_concluded/buy">Transitioni concluse</a>
+{{ context.transition_concluded_sell }}
 </p>
 
 {% endblock %}

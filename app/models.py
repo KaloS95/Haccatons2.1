@@ -1,4 +1,5 @@
 from app import db
+from sqlalchemy import and_, or_
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,13 +22,11 @@ class User(db.Model):
             "username": self.username,
             "phone_number": self.phone_number
         }
-    def getTransition(self, mode):
-        if mode == 'in':
-            return models.Transition.query.filter(models.Transition.buyer.id == self.id).all()
-        elif mode == 'out':
-            return models.Transition.query.filter(models.Transition.seller.id == self.id).all()
+    def getTransition(self, isInProgress):
+        if isInProgress:
+            return Transition.query.filter(and_(Transition.concluded == False, Transition.seller_id == self.id)).all()
         else:
-            pass
+            return Transition.query.filter(and_(Transition.concluded == True, Transition.seller_id == self.id)).all()
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -53,6 +52,14 @@ class Transition(db.Model):
     buyer = db.relationship('User', backref="transitions_as_buyer", foreign_keys=[buyer_id])
     seller = db.relationship('User', backref="transitions_as_seller", foreign_keys=[seller_id])
     order = db.relationship('Offer', backref="transitions", foreign_keys=[order_id])
+
+    concluded = db.Column(db.Boolean)
+
+    def __init__(self, **kwargs):
+        super(Transition, self).__init__(**kwargs)
+        self.concluded = False
+        db.session.add(self)
+        db.session.commit()
 
     def __repr__(self):
         return "<%r -> %r = %r>" % (self.buyer.username, self.seller.username, self.quantity)

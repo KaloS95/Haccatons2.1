@@ -68,9 +68,9 @@ def order_detail(mode,category_name, item_id, order_id):
     return render_template('offer_detail.html',
                            context=context)
 
-@app.route('/<mode>/request-success/<order_id>/')
+@app.route('/request-success/<order_id>/')
 @login_required
-def request_success(mode, order_id):
+def request_success(order_id):
     context = getOrderDetail(order_id)
     create_transition(context['order'])
     return render_template('request-success.html', context=context)
@@ -85,11 +85,41 @@ def get_profile():
     context = getProfileInfo()
     return render_template('profile_info.html', context=context)
 
-@app.route('/profile/transition_in')
+@app.route('/profile/transition_in_progress/')
 @login_required
 def get_profile_transition_in():
-    context = getTransition("in")
+    context = getTransitionList(True)
+    context['mode'] = 'still'
     return render_template('profile_transitions.html', context=context)
+
+@app.route('/profile/transition_concluded/')
+@login_required
+def get_profile_transition_out():
+    context = getTransitionList(False)
+    return render_template('profile_transitions.html', context=context)
+
+@app.route('/confirm-transition/<transition_id>/')
+@login_required
+def confirm_transition(transition_id):
+    context = getTransition(transition_id)
+    return render_template('confirm_transition.html', context=context)
+
+@app.route('/confirm_transition/<transition_id>/confirm/')
+@login_required
+def confirm_transition_yes(transition_id):
+    confirmTransition(transition_id, True)
+    return redirect('profile/transition_in_progress') 
+
+@app.route('/confirm_transition/<transition_id>/decline')
+@login_required
+def confirm_transition_no(transition_id):
+    confirmTransition(transition_id, False)
+    return redirect('profile/transition_in') 
+
+@app.route('/offer-created/')
+@login_required
+def offer_created():
+    return render_template('offer_created.html')
 
 """
 USER LOGGING

@@ -104,8 +104,28 @@ def getProfileInfo():
 
     return context
 
-def getTransition(mode):
+def getTransitionList(isInProgress):
     context = {}
-    user = model.User.query.get(session.get('user', None)['id'])
-    context['transitions'] = user.getTransition(mode)
+    user = models.User.query.get(session.get('user', None)['id'])
+    context['transitions'] = user.getTransition(isInProgress)
     return context
+
+def getTransition(transition_id):
+    context = {}
+    transition = models.Transition.query.get(transition_id)
+    context['transition'] = transition
+    return context
+
+def confirmTransition(transition_id, isAccepted):
+
+    transition = models.Transition.query.get(transition_id)
+    transition.concluded = isAccepted
+
+    if (isAccepted):
+        # Togliere da ordine corrispondente la q.ta
+        offer = models.Offer.query.get(transition.order_id)
+        offer.quantity -= transition.quantity 
+        db.session.add(offer)
+
+    db.session.add(transition)
+    db.session.commit()
