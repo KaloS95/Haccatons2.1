@@ -1,0 +1,21 @@
+ul#list-nav {
+  margin:20px;
+  padding:0;
+  list-style:none;
+  width:auto;
+}
+ul#list-nav li {
+  display:inline;
+    width: inherit;
+}
+ul#list-nav li a {
+ text-decoration:none;
+ padding:5px 0;
+ width:32%;
+ background:#FFFFE0;
+ color:#000000;
+ float:left;
+    text-align:center;
+  border-left:1px solid #fff;
+}
+
