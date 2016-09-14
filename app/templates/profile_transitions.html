@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %} Transizioni Profilo {% endblock %}
+{% block content %}
+<ul>
+    {% for transition in context.transitions %}
+    <li>
+    <p>{{transition.seller}}</p>
+    <p>{{transition.buyer}}</p>
+    <p>{{transition.price}}</p>
+    <p>{{transition.quantity}}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

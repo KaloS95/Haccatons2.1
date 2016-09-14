@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} Profilo {% endblock %}
+{% block content %}
+<p>{{context.user.username}}</p>
+<p>{{context.user.phone_number}}</p>
+
+<p>
+<a href="profile/transition_in/">Transitioni in corso</a>
+{{ context.transition_in_len }}
+</p>
+<p>
+<a href="profile/transition_out/">Transitioni concluse</a>
+{{ context.transition_out_len }}
+</p>
+
+{% endblock %}
+

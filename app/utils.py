@@ -94,3 +94,18 @@ def getItemFromId(item_id):
     item = models.Item.query.get(item_id)
     context['item'] = item
     return context
+
+def getProfileInfo():
+    user = models.User.query.get(session.get('user', None)['id'])
+    context = {}
+    context['user'] = user
+    context['transition_in_len'] = len(user.transitions_as_seller)
+    context['transition_out_len'] = len(user.transitions_as_buyer)
+
+    return context
+
+def getTransition(mode):
+    context = {}
+    user = model.User.query.get(session.get('user', None)['id'])
+    context['transitions'] = user.getTransition(mode)
+    return context
