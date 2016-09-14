@@ -28,8 +28,7 @@ def category_detail(category_name):
 @app.route('/category/<category_name>/<item_id>/')
 def items_list_form_category(category_name, item_id):
     context = getItemOffers(item_id)
-    return render_template('offers_list.html',
-			    context=context)
+    return "Category: %s Id: %s" % (category_name, item_id)
 
     
 

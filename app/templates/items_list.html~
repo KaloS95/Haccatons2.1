@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %} Items List {% endblock %}
+{% block content %}
+<ul>
+    {% for item in context.items %}
+    <li>
+        <a href="./{{item.id}}">{{item.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -28,7 +28,6 @@ class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name=db.Column(db.String(64))
     category_id=db.Column(db.Integer, db.ForeignKey('category.id'))
-    av_offers = db.relationship('Offer', backref='item', lazy="dynamic")
 
 class Transition(db.Model):
     id = db.Column(db.Integer, primary_key=True)

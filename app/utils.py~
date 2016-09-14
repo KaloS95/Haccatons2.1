@@ -59,7 +59,7 @@ def getItemFromCategory(cat_id):
 def getItemOffers(item_id):
     context = {}
 
-    item_offers=models.Item.query.filter(models.Item.id==item_id).one().av_offers.all()
+    item_offers=models.Item.query.filter(models.Item.id==item_id).av_offers.all()
 
     context['item_offers']=item_offers
 	

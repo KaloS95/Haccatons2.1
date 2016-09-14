@@ -4,7 +4,7 @@
 <ul>
     {% for cat in context.category %}
     <li>
-        <a href="category/{{cat.id}}">{{cat.name}}</a>
+        <a href="category/{{cat.name.lower()}}">{{cat.name}}</a>
     </li>
     {% endfor %}
 </ul>
