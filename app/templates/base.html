@@ -1,38 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/static/CSS/mystyle.css">
-    <title>{% block title %}{% endblock %}</title>
-</head>
-<body>
-    <div class="container">
-        {% if session['user'] %}
-        <header>
-            
-            <ul id="list-nav">
-                <li><a href="/offer/category">Offro</a></li>
-                <li><a href="/search/category">Cerco</a></li>
-                <li><a href="/profile">Profilo</a></li>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, max-zoom=1.0">
+
+        <link rel="stylesheet" type="text/css" href="/static/CSS/mystyle.css">
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+            {% if session['user'] %}
+            <header>
+            <ul id="list-nav" class="cf">
+
+                <li {% if request.path.find('offer') != -1 %} class="active"{%endif %}>
+                <a href="/offer/category">Offro</a>
+                </li>
+                <li {% if request.path.find('search') != -1 %} class="active"{%endif %}>
+                <a href="/search/category">Cerco</a>
+                </li>
+                <li {% if request.path.find('profile') != -1 %} class="active"{%endif %}>
+                <a href="/profile">Profilo</a>
+                </li>
             </ul>
-       </header>      
-      </div>      
-        <!--    
-        <ul class="nav">
-            <li><a href="/offer/category">Offro</a></li>
-        
-        
-            <li><a href="/search/category">Cerco</a></li>
-        
-        
-            <li><a href="/profile">Profilo</a><li> </ul>
-        -->
-       
+            </header>      
         </header>
-        <div class="content">
         {% endif %}
-        {% block content %}
-        {% endblock %}
+        <div class="container">
+            {% block content %}
+            {% endblock %}
         </div>
     </body>
 </html>

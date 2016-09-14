@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% block title %} Items List {% endblock %}
 {% block content %}
-<ul>
+{% if context.items_list %}
+<p class="separator category-name">{{ context.items_list[0].category.name }}</p>
+<ul class="cf" style="width: 100%">
     {% for item in context.items_list %}
-    <li>
+    <li class="item-list">
         <a href="./{{item.id}}">{{item.name}}</a>
     </li>
     {% endfor %}
 </ul>
+{% else %}
+<h2>No item in this category!</h2>
+{% endif %}
 {% endblock %}

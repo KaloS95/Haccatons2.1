@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-    <h1>Login</h1>
+{% extends 'base.html' %}
+{% block title %} Login {% endblock %}
+{% block content %}
+    <div id="logo"></div>
+    <div id="payoff">Agrisharing Mobile</div>
     <form action="" method="POST" name="login">
         {{ form.hidden_tag() }}
-        <p>
-            Name: 
+        <div class="input-cont">
+            <label for="">Name:</label>
             {{ form.username }}
-        </p>
-        <p>Password: {{ form.password }}</p>
-        <p>
+        </div>
+        <div class="input-cont">
+            <label for="">Password:</label>
+            {{ form.password }}
+        </div>
             <input type="submit" value="Sign IN">
         </p>
     </form>
-</body>
-</html>
+
+{% endblock %}

@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 {% block title %} Crea Offerta {% endblock %}
 {% block content %}
-{{ context.item.name }}
+<p class="separator">Insert price and quantity of item you want to sell</p>
+<div class="item-elem">{{ context.item.name }}</div>
 <form action="" method="POST" name="offer">
     {{ context.form.hidden_tag() }}
     <input type="hidden" name="quantity" value="0" id="quantity-input">
-    <div>
+    <div class="input-cont">
         <label for="">Prezzo</label>
         <input type="number" name="price">
     </div>
+    <div class="quantity-info">
     <a href="#" id="minus">-</a>
     <span id="quantity">Quantità Desiderata</span>
     <a href="#" id="plus">+</a>
+    </div>
     <input type="submit" value="Prosegui">
 </form>
 <script type="text/javascript">

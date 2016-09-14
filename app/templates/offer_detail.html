@@ -1,19 +1,38 @@
 {% extends 'base.html' %}
 {% block title %} Dettaglio offerta {{ context.order.id }}{% endblock %}
 {% block content %}
-    <p>Price: {{context.order.price}}</p>
-    <p>Quantity: {{context.order.quantity}}</p>
-    <p>{{context.order.offerer.username}}</p>
-    <p>Scegli la quantità di questo prodotto</p>
-    <a href="#" id="minus">-</a>
-    <span id="quantity" max="{{context.order.quantity}}">Quantità Desiderata</span>
-    <a href="#" id="plus">+</a>
-    {{ context.form.errors }}
-    <form action="" method="POST" name="offer">
-        {{ context.form.hidden_tag() }}
-        <input type="hidden" name="quantity" value="0" id="quantity-input">
-        <input type="submit" value="Prosegui">
-    </form>
+    <div class="user-info cf">
+        <div class="user-img middle"></div>
+        <div class="user middle">
+            {{ context.order.user.username }}
+        </div>
+    </div>
+    <div class="offer-info cf">
+        <div class="item">
+            {{ context.order.item.name }}
+        </div>
+        <div>
+            <div>
+                Price: R {{ context.order.price }}
+            </div>
+            <div>
+                Quantity: Kg {{ context.order.quantity }}
+            </div>
+        </div>
+    </div>
+    <p class="separator">Scegli la quantità di questo prodotto</p>
+    <div class="quantity-info">
+        <a href="#" id="minus">-</a>
+        <span id="quantity" max="{{context.order.quantity}}">Quantità Desiderata</span>
+        <a href="#" id="plus">+</a>
+    </div>
+    <div class="confirm">
+        <form action="" method="POST" name="offer">
+            {{ context.form.hidden_tag() }}
+            <input type="hidden" name="quantity" value="0" id="quantity-input">
+            <input type="submit" value="Prosegui">
+        </form>
+    </div>
     <script type="text/javascript">
         var minus = document.getElementById('minus'); 
         var plus = document.getElementById('plus');

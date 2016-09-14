@@ -4,7 +4,8 @@
 
 <ul>
     {% for cat in context.category %}
-    <li>
+    <li class="category">
+
         <a href="./{{cat.id}}">{{cat.name}}</a>
     </li>
     {% endfor %}

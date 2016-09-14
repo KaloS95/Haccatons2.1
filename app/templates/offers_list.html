@@ -1,10 +1,22 @@
 {% extends 'base.html' %}
 {% block title %} Offers List {% endblock %}
 {% block content %}
+<p class="separator category-name">{{ context.item_offers[0].item.category.name}}</p>
 <ul>
     {% for item in context.item_offers %}
-    <li>
-    <a href="./{{item.id}}">{{item.price}} {{item.quantity}}</a>
+    <li class="order-item cf ">
+        <div class="info middle">
+            <div class="user-img"></div>
+            <div class="username">
+                <a href="./{{item.id}}">{{ item.user.username }}</a>
+            </div>
+        </div>
+        <div class="quantity middle">
+            Kg {{ item.quantity }}
+        </div>
+        <div class="price middle">
+            R {{ item.price }}
+        </div>
     </li>
     {% endfor %}
 </ul>

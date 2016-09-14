@@ -19,9 +19,9 @@ def login_required(func):
 
 @app.route('/')
 def index():
-    if not session.get('user', None):
-        return redirect('/login')
-    return redirect('/offer/category')
+    if session.get('user', None):
+        return redirect('/profile')
+    return render_template('index.html') 
 
 @app.route('/<mode>/category/')
 @login_required

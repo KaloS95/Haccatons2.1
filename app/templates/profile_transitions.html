@@ -3,15 +3,25 @@
 {% block content %}
 <ul>
     {% for transition in context.transitions %}
-    <li>
-        <p>{{transition.seller}}</p>
-        <p>{{transition.buyer}}</p>
-        <p>{{transition.price}}</p>
-        <p>{{transition.quantity}}</p>
-        {% if context.mode == 'still' %}
-        <a href="/confirm-transition/{{transition.id}}/">Concludi</a>
-        {% endif %}
+    <li class="profile-transition middle">
+        <div class="info">
+            <div class="seller">
+                {{ transition.seller.username}}
+            </div>
+            <div class="other-info">
+                Price: {{ transition.price}} Quantity: {{ transition.quantity}}
+            </div>
+        </div>
+        <div class="btn-cont">
+            {% if context.mode == 'still' %}
+            <a class="btn orange" href="/confirm-transition/{{transition.id}}/">Concludi</a>
+            {% endif %}
+        </div>
+
     </li>
     {% endfor %}
+    {% if not context.transitions %}
+    <h2>There aren't any current Transition!</h2>
+    {% endif %}
 </ul>
 {% endblock %}

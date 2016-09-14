@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
 {% block title %} Prima Paggina {% endblock %}
 {% block content %}
-<h1>Benvenuto su questa app mega meravigliosa</h1>
-{% if not session['user'] %}
-<a href="/login">Login</a>
-<a href="/register">Registrati</a>
-<a href="/logout">Logout</a>
-{% else %}
-<h2>Ehi sembra che tu sei un utente loggato caro {{ session['user'].username }}</h2>
-Lista delle categorie!
-{% endif %}
+<div id="logo"></div>
+<div id="payoff">Agrisharing Mobile</div>
+<a class="btn" href="/login">Login via SMS</a>
+<a class="btn" href="">Login with Facebook</a>
+<p class="separator">Or</p>
+<a class="btn" href="/register">Registrati</a>
 {% endblock %} 

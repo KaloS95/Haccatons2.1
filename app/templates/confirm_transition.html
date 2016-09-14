@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% block title %} Transizioni Profilo {% endblock %}
 {% block content %}
-<h1>Hai venduto questo oggetto</h1>
-<p>{{context.transition.order}}</p>
-<a href="/confirm_transition/{{context.transition.id}}/confirm">Si</a>
-<a href="/confirm_transition/{{context.transition.id}}/decline">No</a>
+<h2>Did you sell this object?</h2>
+
+<div class="item-elem">{{context.transition.order.item.name}}</div>
+<p class="separator">Price: R {{context.transition.order.price}}</p>
+<p class="separator"> Quantity: Kg {{context.transition.order.quantity}}</p>
+<div class="btns-cont">
+    <a href="/confirm_transition/{{context.transition.id}}/confirm">Si</a>
+    <a href="/confirm_transition/{{context.transition.id}}/decline">No</a>
+</div>
 {% endblock %}
 
