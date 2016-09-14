@@ -2,13 +2,16 @@
 
 from app import app
 from flask import render_template, redirect, session
+from functools import wraps
 
 from .forms import *
 
 from utils import *
 
 def login_required(func):
+    @wraps(func)
     def func_wrapper(*args, **kwargs):
+        print session.get('user', None)
         if not session.get('user', None):
             return redirect('/login')
         return func(*args, **kwargs)
@@ -82,7 +85,7 @@ def register():
     if register_form.validate_on_submit():
         # No errors! We can proceed!
         create_user(register_form)
-        return redirect('/index') 
+        return redirect('/') 
     return render_template('register.html', form=register_form)
 
 
@@ -92,7 +95,7 @@ def login_user():
 
     if form.validate_on_submit():
         if login(form):
-            return redirect('/index')
+            return redirect('/')
         return redirect('/login')
     return render_template('login.html',
                            form=form)
