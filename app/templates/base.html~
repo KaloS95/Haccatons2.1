@@ -15,8 +15,8 @@
                 <li><a href="/search/category">Cerco</a></li>
                 <li><a href="/profile">Profilo</a></li>
             </ul>
-       </header>      
-      </div>      
+            
+            
         <!--    
         <ul class="nav">
             <li><a href="/offer/category">Offro</a></li>
@@ -34,5 +34,6 @@
         {% block content %}
         {% endblock %}
         </div>
-    </body>
+    </div>
+</body>
 </html>
